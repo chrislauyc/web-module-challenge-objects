@@ -15,8 +15,12 @@ The function should:
   Example createMenuItem('tacos', 8, 'Lunch') should return {name: 'tacos', price: 8, category: 'Lunch'}
 */
 
-function createMenuItem(/*Your code here*/){
-    /*Your code here*/
+function createMenuItem(name,price,category){
+    return {
+      name:name,
+      price:price,
+      category:category,
+    };
 }
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1b: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -28,7 +32,9 @@ Test your createMenuItems function by doing the following:
   
   For example: createMenuItem("pizza",5,"lunch") would return this as the object: {name:"Pizza",price:5,category:"lunch"}
 */
-
+console.log(createMenuItem('pizza',5,'lunch'));
+console.log(createMenuItem('pasta',10,'dinner'));
+console.log(createMenuItem('burger',8,'lunch'));
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -48,7 +54,14 @@ export const burger = {
   name: "Burger", 
   price: 18, 
   category: "Lunch", 
-  /*Your code here*/
+  discount:function(groupName){
+    if(groupName === 'teacher' || groupName === 'student'){
+      return this.price*0.75;
+    }
+    else{
+      return this.price*0.9;
+    }
+  },
 }
 
 
@@ -69,7 +82,13 @@ const reviews = [
 Using the reviews array above:
   1. log only Julius' feedback to the console - no function needed 
 */
-
+for(let i = 0; i < reviews.length; i++){
+  let person = reviews[i];
+  if(person.name === 'Julius'){
+    console.log(person.feedback);
+    break;
+  }
+}
 
 
 
@@ -78,7 +97,8 @@ Using the reviews array above do the following: (no function needed)
   1. Following the same format (name, rating, feedback), add a new fictitious review object to the reviews array
   2. log the whole array to the console, make sure the new review is inside of it   
 */
-
+reviews.push({name:'Chris',rating:5,feedback:'pretty good.'});
+// console.log(reviews);
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -86,8 +106,15 @@ Reyna's feedback is missing! Use what you know to do the following: (no function
   1. Add this feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"
   2. log the reviews array to the console to check your work
 */
-
-
+for(let i = 0; i < reviews.length; i++){
+  let person = reviews[i];
+  console.log(person.name);
+  if(person.name === 'Reyna'){
+    person.feedback = "this place is chill with really cool people, great for getting work done on weekdays";
+    break;
+  }
+}
+// console.log(reviews);
 
 
 
@@ -102,8 +129,9 @@ Use the getReviewByIndex function below to do the following:
 */
 
 
-function getReviewByIndex(/*Your code here*/) {
-  /*Your code here*/
+function getReviewByIndex(arr,index) {
+  let person = arr[index];
+  return `${person.name} gave the restaurant a ${person.rating} star review, and their feedback was: ${person.feedback}`;
 }
 
 
@@ -121,9 +149,11 @@ Use the getLastReview function below to do the following:
 */
 
 
-function getLastReview(/*Your code here*/) {
-  /*Your code here*/
+function getLastReview(arr) {
+  let last = arr[arr.length-1];
+  return `${last.name} gave the restaurant a ${last.rating} star review, and their feedback was: ${last.feedback}`;
 } 
+console.log(getLastReview(reviews));
 
 
 
@@ -143,10 +173,17 @@ Use the getReviewsByRating function below to do the following:
   ]
 */
 
- function getReviewByRating(/* code here */) {
-    /* code here */
+ function getReviewByRating(arr,rating) {
+    rating = Math.floor(rating);
+    let retArr = []
+    for(let i = 0; i < arr.length; i++){
+      if(Math.floor(arr[i].rating) === rating){
+        retArr.push(arr[i]);
+      }
+    }
+    return retArr;
   }
-
+// console.log(`testing getReviewByRating: `)
   
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪💪   
 Use the getLongReviews function below to do the following:
@@ -161,9 +198,16 @@ Use the getLongReviews function below to do the following:
   ]
 */
 
-function getLongReviews(/* code here */) {
-    /* code here */
+function getLongReviews(arr) {
+  let retArr = [];  
+  for(let i = 0; i < arr.length; i++){
+    if(arr[i].feedback.length > 15){
+      retArr.push(arr[i]);
+    }
   }
+  return retArr;
+}
+
   
 
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪💪💪💪💪 
